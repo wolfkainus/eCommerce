@@ -1,4 +1,13 @@
 Rails.application.routes.draw do
+
+  resources :products do
+    resources :reviews, only: [:create]
+
+    #member do
+    #  product 'set_style'
+    #end
+  end 
+
   devise_for :users
   resources :products
   # The priority is based upon order of creation: first created -> highest priority.

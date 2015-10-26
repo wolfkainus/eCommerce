@@ -22,3 +22,18 @@
 
 <%= link_to 'Edit', edit_product_path(@product) %> |
 <%= link_to 'Back', products_path %>
+
+<h2>Deja tu Review</h2>
+<%= form_for [@product, Review.new] do |f| %>
+	<%= f.label :content, "Review" %>
+	<%= f.text_area :content %>
+	<%= f.submit "Enviar" %>
+<% end %>
+
+<h2>Reviews</h2>
+<% @reviews.each do |review| %>
+	<hr>
+	<p><small><%= review.created_at %></small></p>
+	<p><%= review.content %></p>
+	<hr>
+<% end %>

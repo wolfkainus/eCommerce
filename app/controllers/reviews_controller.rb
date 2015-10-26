@@ -1,9 +1,4 @@
-class Review < ActiveRecord::Base
-	belongs_to :product
-	has_many :products, dependent: :destroy
-
-	validates :content, presence: true
-
+class ReviewsController < ApplicationController
 	def create
 		product = Product.find(params[:product_id])
 
@@ -16,4 +11,5 @@ class Review < ActiveRecord::Base
 		def review_params
 			params.require(:review).permit(:content)
 		end
+
 end
