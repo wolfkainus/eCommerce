@@ -1,4 +1,9 @@
 class ReviewsController < ApplicationController
+
+	before_action :authenticate_user!, except: [:index, :show] 
+  	before_action :check_cliente!, only: [:edit, :update] 
+  	before_action :check_admin!, only: [:destroy]
+
 	def create
 		product = Product.find(params[:product_id])
 
