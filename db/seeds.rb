@@ -8,7 +8,7 @@
 Product.destroy_all
 Review.destroy_all
 
-reviews = []
+products = []
 
 (1..20).each do |m|
   products << Product.create(
@@ -20,12 +20,12 @@ reviews = []
   )
 end
 
-reviews = []
+#reviews = []
 
-(1..50).each do |r|
-  reviews << Review.create(
-    content: Faker::Lorem.paragraph(3),
-    review: reviews[rand(reviews.length)]#,
-    #user: users[rand(users.length)]
-  )
-end
+#(1..50).each do |r|
+#  reviews << Review.create(
+#    content: Faker::Lorem.paragraph(3),
+#    review: reviews[rand(reviews.length)]#,
+#    #user: users[rand(users.length)]
+#  )
+#end
