@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151027002451) do
+ActiveRecord::Schema.define(version: 20151028155757) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -71,16 +71,21 @@ ActiveRecord::Schema.define(version: 20151027002451) do
     t.integer  "stock"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.integer  "category_id"
   end
+
+  add_index "products", ["category_id"], name: "index_products_on_category_id", using: :btree
 
   create_table "reviews", force: :cascade do |t|
     t.text     "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer  "product_id"
+    t.integer  "user_id"
   end
 
   add_index "reviews", ["product_id"], name: "index_reviews_on_product_id", using: :btree
+  add_index "reviews", ["user_id"], name: "index_reviews_on_user_id", using: :btree
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -98,7 +103,7 @@ ActiveRecord::Schema.define(version: 20151027002451) do
     t.string   "name"
     t.string   "lastname"
     t.string   "username"
-    t.integer  "role"
+    t.integer  "role",                   default: 1,  null: false
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree
@@ -110,5 +115,7 @@ ActiveRecord::Schema.define(version: 20151027002451) do
   add_foreign_key "orders", "users"
   add_foreign_key "product_orders", "orders"
   add_foreign_key "product_orders", "products"
+  add_foreign_key "products", "categories"
   add_foreign_key "reviews", "products"
+  add_foreign_key "reviews", "users"
 end

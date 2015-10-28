@@ -1,5 +1,6 @@
 class User < ActiveRecord::Base
   before_save :default_role
+  has_many :reviews, dependent: :destroy
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -9,10 +10,11 @@ class User < ActiveRecord::Base
   has_many :product_likes, through: :likes, source: :product
   has_many :review_likes, through: :likes, source: :review
 
-  validates :username, uniqueness: { case_sensitive: false }, presence: true #ver si funciona
-  validate :validate_username
+  validates :username, uniqueness: {case_sensitive: false}, presence: true
   validates :name, presence: true
   validates :lastname, presence: true
+
+  validate :validate_username
 
   enum role: [:admin, :cliente, :guest] 
 

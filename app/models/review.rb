@@ -1,5 +1,6 @@
 class Review < ActiveRecord::Base
 	belongs_to :product
+	belongs_to :user
 	has_many :products, dependent: :destroy
 
 	has_many :likes, as: :likeable 

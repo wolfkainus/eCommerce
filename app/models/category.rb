@@ -1,5 +1,4 @@
 class Category < ActiveRecord::Base
-	has_many :products, dependent: :destroy
-
-	validates :name, precense:true
+	has_many :products
+	belongs_to :category
 end
