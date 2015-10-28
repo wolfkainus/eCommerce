@@ -26,6 +26,14 @@ Rails.application.routes.draw do
     end
   end
 
+  namespace :admin do
+    resources :products
+    resources :orders
+    resources :users
+
+    get '/', to: 'pages#index'
+  end
+
   root 'products#index'
 
   # Example of regular route:

@@ -1,4 +1,8 @@
 class Product < ActiveRecord::Base
+
+  mount_uploader :image, ImageUploader
+
+
 	belongs_to :category
 	has_many :reviews, dependent: :destroy
   	has_many :product_orders

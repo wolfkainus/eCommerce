@@ -3,12 +3,13 @@ class User < ActiveRecord::Base
   has_many :reviews, dependent: :destroy
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
+
+  has_many :likes
+  has_many :product_likes, through: :likes, source: :likeable, source_type: 'Product'
+  has_many :review_likes, through: :likes, source: :likeable, source_type: 'Review'
+
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
-
-  has_many :likes, as: :likeable
-  has_many :product_likes, through: :likes, source: :product
-  has_many :review_likes, through: :likes, source: :review
 
   validates :username, uniqueness: {case_sensitive: false}, presence: true
   validates :name, presence: true

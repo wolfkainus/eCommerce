@@ -1,10 +1,10 @@
-<%= form_for(@product) do |f| %>
-  <% if @product.errors.any? %>
+<%= form_for([:admin, @admin_product]) do |f| %>
+  <% if @admin_product.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(@product.errors.count, "error") %> prohibited this product from being saved:</h2>
+      <h2><%= pluralize(@admin_product.errors.count, "error") %> prohibited this product from being saved:</h2>
 
       <ul>
-      <% @product.errors.full_messages.each do |message| %>
+      <% @admin_product.errors.full_messages.each do |message| %>
         <li><%= message %></li>
       <% end %>
       </ul>
@@ -36,9 +36,11 @@
   <div class="field">
     <%= f.label :image %><br>
     <%= f.file_field :image %>
+    <%= f.hidden_field :image_cache %>
   </div>
 
   <div class="actions">
     <%= f.submit %>
   </div>
 <% end %>
+

@@ -3,8 +3,8 @@ class Review < ActiveRecord::Base
 	belongs_to :user
 	has_many :products, dependent: :destroy
 
-	has_many :likes, as: :likeable 
-	has_many :user_likes, through: :likes, source: :user 
+  	has_many :likes, as: :likeable
+  	has_many :user_likes, through: :likes, source: :user
 
 	validates :content, presence: true
 

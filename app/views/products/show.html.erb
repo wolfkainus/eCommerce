@@ -1,8 +1,11 @@
-<p id="notice"><%= notice %></p>
-
 <p>
   <strong>Name:</strong>
   <%= @product.name %>
+</p>
+
+<p>
+  <strong>Categoria:</strong>
+  <%= @product.category %>
 </p>
 
 <p>
@@ -11,13 +14,18 @@
 </p>
 
 <p>
-  <strong>Price:</strong>
+  <strong>Price:</stroy>
   <%= @product.price %>
 </p>
 
 <p>
   <strong>Stock:</strong>
   <%= @product.stock %>
+</p>
+
+<p>
+  <strong>Image:</strong><br>
+  <%= image_tag @product.image, class: "product_image" %>
 </p>
 
 <%= link_to 'Edit', edit_product_path(@product) %> |
@@ -40,7 +48,7 @@
 	<%= f.label :content, "Review" %>
 	<%= f.text_area :content %>
 	<%= f.submit "Enviar" %>
-<% end %>r
+<% end %>
 
 <h2>Reviews</h2>
 <% @reviews.each do |review| %>
