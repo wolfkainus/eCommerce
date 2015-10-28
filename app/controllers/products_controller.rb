@@ -62,6 +62,20 @@ class ProductsController < ApplicationController
     end
   end
 
+  def like
+      @product = Product.find(params[:id])
+      @like = @product.likes.build(user: current_user)
+
+      if @product.liked_by? current_user
+        @product.remove_like current_user
+        redirect_to @product, notice: 'Ok, ya no te gusta'
+      elsif @product.save
+        redirect_to @product, notice: 'Nos gusta que le guste'
+      else
+        redirect_to @product, notice: 'Intentalo de nuevo, tu like no quedo registrado'
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_product

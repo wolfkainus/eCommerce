@@ -5,6 +5,10 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable
 
+  has_many :likes, as: :likeable
+  has_many :product_likes, through: :likes, source: :product
+  has_many :review_likes, through: :likes, source: :review
+
   validates :username, uniqueness: { case_sensitive: false }, presence: true #ver si funciona
   validate :validate_username
   validates :name, presence: true
@@ -13,7 +17,7 @@ class User < ActiveRecord::Base
   enum role: [:admin, :cliente, :guest] 
 
   def default_role 
-    self.role ||= 2
+    self.role ||= 1
   end
 
   def validate_username
@@ -22,4 +26,7 @@ class User < ActiveRecord::Base
     end
   end
 
+  def to_s
+    "#{self.name} #{self.lastname}"
+  end
 end

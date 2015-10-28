@@ -23,6 +23,18 @@
 <%= link_to 'Edit', edit_product_path(@product) %> |
 <%= link_to 'Back', products_path %>
 
+<p>Likes: <strong><%= @product.likes.count %></strong> </p>
+
+  <% if can? :like, Product %>
+    <p>
+      <% unless @product.liked_by? current_user %>
+        <%= link_to 'Me Gusta', like_product_path(@product) %>
+      <% else %>
+        <%= link_to 'Ya No Me Gusta', like_product_path(@product) %>
+      <% end %>
+    </p>
+  <% end %>
+
 <h2>Deja tu Review</h2>
 <%= form_for [@product, Review.new] do |f| %>
 	<%= f.label :content, "Review" %>

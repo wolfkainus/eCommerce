@@ -12,6 +12,22 @@ class ReviewsController < ApplicationController
 		redirect_to product
 	end
 
+	def like
+		@product = Product.find(params[:product_id])
+		@review = Review.find(params[:id])
+		@like = @review.likes.build(user: current_user)
+
+		if @review.liked_by? current_user
+			@review.remove_like current_user
+			redirect_to @product, notice: 'Ok, ya no te gusta'
+		elsif @review.save
+			redirect_to @product, notice: 'Nos gusta que le guste'
+		else
+			redirect_to @product, notice: 'Ha ocurrido un error, tu like no fue guardado'
+		end
+ 	end
+
+
 	private
 		def review_params
 			params.require(:review).permit(:content)

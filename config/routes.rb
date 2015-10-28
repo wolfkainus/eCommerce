@@ -14,6 +14,18 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
+
+  resources :products do
+    resources :reviews, only: [:create, :edit] do
+      member do
+        get 'like'
+      end
+    end
+    member do
+        get 'like'
+    end
+  end
+
   root 'products#index'
 
   # Example of regular route:
