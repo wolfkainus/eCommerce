@@ -9,6 +9,8 @@ products = []
 		description: Faker::Lorem.sentence,
 		price: Faker::Commerce.price,
 		stock: rand(1..100)
+		#category: categories[rand(categorias.length)],
+		remote_image_url: 'http://lorempixel.com/2000/1000'
 		)
 
 	end
